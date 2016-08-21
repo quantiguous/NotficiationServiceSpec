@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+ruby '2.2.2'
+gem 'api_banking'
+gem 'activerecord-oracle_enhanced-adapter'
+gem 'ruby-oci8'
+gem 'rspec'
+gem 'factory_girl'
+gem 'dotenv'
