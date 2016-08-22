@@ -8,6 +8,7 @@ RSpec.describe "notification_service" do
 
   before(:all) do
     ApiBanking::NotificationService.configure do |config|
+      config.proxy = "10.211.55.2:8080"
       config.environment = ApiBanking::Environment::QG::DEMO.new(ENV['API_USERNAME'], ENV['API_PASSWORD'])
     end
     @app1 = FactoryGirl.create(:ns_app) 
@@ -63,7 +64,7 @@ RSpec.describe "notification_service" do
       p request
       result = ApiBanking::NotificationService.getTopics(request)
       p result
-      result.should be_a_match_to_topic([@topic1,@topic2,@topic3,@topic4])
+      expect(result).to be_a_match_to_topic([@topic1,@topic2,@topic3,@topic4])
     end
 
     it "should return all subscribed topics for the group & customer specified in the request" do 
@@ -79,8 +80,8 @@ RSpec.describe "notification_service" do
       p request
       result = ApiBanking::NotificationService.getTopics(request)
       p result
-      result.should be_a_match_to_topic([@topic1,@topic2])
-      result.should be_a_match_to_subscription([@topic1,@topic2],'1234')
+      expect(result).to be_a_match_to_topic([@topic1,@topic2])
+      # expect(result).to be_a_match_to_subscription([@topic1,@topic2],'1234')
     end
 
     it "should return all unsubscribed topics for the group & customer specified in the request" do 
@@ -96,7 +97,7 @@ RSpec.describe "notification_service" do
       p request
       result = ApiBanking::NotificationService.getTopics(request)
       p result
-      result.should be_a_match_to_topic([@topic3,@topic4])
+      expect(result).to be_a_match_to_topic([@topic3,@topic4])
     end
   end
 end
