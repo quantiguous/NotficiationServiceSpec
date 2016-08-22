@@ -8,7 +8,6 @@ RSpec.describe "notification_service" do
 
   before(:all) do
     ApiBanking::NotificationService.configure do |config|
-      config.proxy = "10.211.55.2:8080"
       config.environment = ApiBanking::Environment::QG::DEMO.new(ENV['API_USERNAME'], ENV['API_PASSWORD'])
     end
     @app1 = FactoryGirl.create(:ns_app) 
